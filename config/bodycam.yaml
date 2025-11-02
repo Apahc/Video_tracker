@@ -1,0 +1,16 @@
+# config/bodycam.yaml
+camera:
+  fx: 800.0
+  fy: 800.0
+  cx: 640.0
+  cy: 360.0
+  width: 1280
+  height: 720
+  fps: 15.0
+
+orb:
+  n_features: 3000
+  scale_factor: 1.2
+  n_levels: 8
+  ini_th_fast: 12
+  min_th_fast: 7
