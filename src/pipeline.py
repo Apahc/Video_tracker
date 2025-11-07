@@ -100,6 +100,9 @@ def run_pipeline(
     with tqdm(total=total_frames, desc="Обработка") as pbar:
         frame_id = 0
         while True:
+            # Лог
+            print(f"Frame {frame_id}")
+
             ret, frame = cap.read()
             if not ret:
                 break
@@ -109,6 +112,9 @@ def run_pipeline(
             # Глубина
             _, mean_depth = midas.predict(frame)
             depths.append(mean_depth)
+
+            # Тест глубины если ~1–2м вместо 5–10м, масштаб неверен.
+            print(f"Frame {frame_id}: mean_depth={mean_depth:.2f}m")
 
             # SLAM: трекинг позы
             pose = slam.track(frame_rgb, frame_id / fps, scale_factor=mean_depth)

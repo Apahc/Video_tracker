@@ -31,7 +31,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--input",
-        default="data/input/my_video_2.mp4",
+        default="data/output/my_video_2_15fps.mp4",
         help="Путь к входному видеофайлу (MP4/AVI)"
     )
     parser.add_argument(

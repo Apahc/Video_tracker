@@ -396,7 +396,7 @@ def main() -> None:
     parser.add_argument('--duration', type=float, default=30.0,
                         help='Длительность видео (сек)')
     parser.add_argument('--path', type=str,
-                        default="5,180L,5,90L,3,180R,2,90R,4,90L,1,90R,5",
+                        default="5,30L,10,30R,15",
                         help='Эталонный путь: "5,90L,3,180R,2"')
     parser.add_argument('--max_speed', type=float, default=10.0,
                         help='Макс. допустимая скорость (км/ч)')

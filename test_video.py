@@ -133,13 +133,13 @@ def prepare_video(
 # Тестовый запуск
 if __name__ == "__main__":
     """
-        Пример запуска:
-            python test_video.py
-        Ожидает:
-            data/input/my_video_2.mp4
-        Создаёт:
-            data/output/my_video_2_15fps.mp4
-        """
+    Пример запуска:
+        python test_video.py
+    Ожидает:
+        data/input/my_video_2.mp4
+    Создаёт:
+        data/output/my_video_2_15fps.mp4
+    """
     input_video = "data/input/my_video_2.mp4"
     output_video = "data/output/my_video_2_15fps.mp4"
 

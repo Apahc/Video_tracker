@@ -212,6 +212,8 @@ class ORBSLAM3Tracker:
 
         # Топ-100 лучших матчей
         matches = sorted(matches, key=lambda x: x.distance)[:100]
+        # Лог
+        print(f"matches={len(matches)}, good={len(matches[:100])}")
 
         # Точки для Essential Matrix
         pts1 = np.float32([self.last_kp[m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
@@ -241,6 +243,9 @@ class ORBSLAM3Tracker:
         # Текущая позиция
         pose = [self.t_prev[0, 0], self.t_prev[1, 0], self.t_prev[2, 0]]
         pose_scaled = [p * scale_factor for p in pose]
+
+        # Лог
+        print(f"Pose: {pose}, scaled: {pose_scaled}")
 
         # Сохранение состояния
         self.last_kp = kp
