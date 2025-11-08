@@ -15,8 +15,9 @@ import cv2
 import json
 import numpy as np
 from tqdm import tqdm
-from .midas import MiDaSEstimator
-from .slam import ORBSLAM3Tracker
+from src.midas import MiDaSEstimator
+from src.slam import ORBSLAM3Tracker
+from src.stabilize import stabilize_video_ffmpeg
 
 
 def run_pipeline(
@@ -45,6 +46,7 @@ def run_pipeline(
         -----
         Алгоритм:
 
+        0. Стабилизируем видео
         1. Открытие видео через ``cv2.VideoCapture``.
         2. Извлечение FPS и общего количества кадров.
         3. Инициализация:
@@ -79,45 +81,52 @@ def run_pipeline(
         | }
 
     """
-    # 1. Открытие видео
+    # 0. Стабилизация
+    # Настраиваем
+    stable_path = "data/temp/stabilized.mp4"
+    video_path = stabilize_video_ffmpeg(video_path, stable_path)
+
+    # 1. Открытие стабилизированного видео
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         raise FileNotFoundError(f"Видео не найдено: {video_path}")
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    duration = total_frames / fps
+    duration = total_frames / fps if fps > 0 else 0.0
     print(f"Видео: {total_frames} кадров, {duration:.1f} сек, {fps:.1f} FPS")
 
     # 2. Инициализация моделей (один раз)
     midas = MiDaSEstimator(device="cpu")  # или "cuda"
     slam = ORBSLAM3Tracker(vocab_path="unused", config_path=config_path)
 
-    trajectory = []
-    depths = []
+    trajectory = [[0.0, 0.0, 0.0]]  # стартовая точка
+    prev_depth = None
 
     # 3. Обработка кадров
     with tqdm(total=total_frames, desc="Обработка") as pbar:
         frame_id = 0
         while True:
-            # Лог
-            print(f"Frame {frame_id}")
-
             ret, frame = cap.read()
             if not ret:
                 break
 
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            # Глубина
+            # Глубина (MiDaS)
             _, mean_depth = midas.predict(frame)
-            depths.append(mean_depth)
-
-            # Тест глубины если ~1–2м вместо 5–10м, масштаб неверен.
             print(f"Frame {frame_id}: mean_depth={mean_depth:.2f}m")
 
-            # SLAM: трекинг позы
-            pose = slam.track(frame_rgb, frame_id / fps, scale_factor=mean_depth)
+            # Масштаб
+            if prev_depth is not None and prev_depth > 0:
+                rel_scale = prev_depth / mean_depth
+            else:
+                rel_scale = 1.0
+            prev_depth = mean_depth
+            scale = mean_depth * rel_scale
+
+            # SLAM
+            pose = slam.track(frame_rgb, frame_id / fps, scale_factor=scale)
             if pose is not None:
                 trajectory.append(pose)
 
@@ -128,31 +137,28 @@ def run_pipeline(
     cap.release()
     slam.shutdown()
 
-    # 5. Расчёт статистики
-    if len(trajectory) < 2:
-        print("Предупреждение: траектория содержит менее 2 точек. Дистанция = 0.")
-        total_distance = 0.0
-    else:
-        diffs = np.diff(np.array(trajectory), axis=0)       # [N-1, 3]
-        segment_distances = np.linalg.norm(diffs, axis=1)   # [N-1]
+    # 5. Расчёт дистанции
+    if len(trajectory) > 1:
+        diffs = np.diff(np.array(trajectory), axis=0)
+        segment_distances = np.linalg.norm(diffs, axis=1)
         total_distance = float(segment_distances.sum())
         avg_speed_kmh = total_distance / duration * 3.6 if duration > 0 else 0.0
-        avg_depth_m = float(np.mean(depths)) if depths else 0.0
+    else:
+        total_distance = 0.0
+        avg_speed_kmh = 0.
 
-    # 6. Формирование результата
+    # 6. Результат
     result = {
         "video": video_path,
         "duration_sec": round(duration, 2),
         "distance_m": round(total_distance, 2),
         "avg_speed_kmh": round(avg_speed_kmh, 2),
         "points": len(trajectory),
-        "avg_depth_m": round(avg_depth_m, 2),
-        "trajectory": trajectory                # Список [[x, y, z], ...]
+        "trajectory": trajectory
     }
 
-    # 7. Сохранение в JSON
+    # 7. Сохранение
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
 

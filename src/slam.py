@@ -123,7 +123,7 @@ class ORBSLAM3Tracker:
         self.matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
         self.last_kp = None
         self.last_desc = None
-        self.trajectory = []
+        self.trajectory = [[0.0, 0.0, 0.0]]
         self.R_prev = np.eye(3, dtype=np.float32)
         self.t_prev = np.zeros((3, 1), dtype=np.float32)
 
@@ -202,8 +202,7 @@ class ORBSLAM3Tracker:
         if self.last_desc is None:
             self.last_kp = kp
             self.last_desc = desc
-            self.trajectory.append([0.0, 0.0, 0.0])
-            return [0.0, 0.0, 0.0]
+            return None  # не добавляем точку
 
         # Матчинг
         matches: List[cv2.DMatch] = self.matcher.match(self.last_desc, desc)
@@ -212,8 +211,6 @@ class ORBSLAM3Tracker:
 
         # Топ-100 лучших матчей
         matches = sorted(matches, key=lambda x: x.distance)[:100]
-        # Лог
-        print(f"matches={len(matches)}, good={len(matches[:100])}")
 
         # Точки для Essential Matrix
         pts1 = np.float32([self.last_kp[m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
@@ -236,23 +233,24 @@ class ORBSLAM3Tracker:
         if R is None or t is None:
             return None
 
+        # t — в нормированных координатах (пиксели / фокус)
+        # t_norm = [Δx/f, Δy/f, Δz/f]
+        t_norm = t.flatten()  # [tx, ty, tz]
+
+        baseline = scale_factor / self.focal    # Z / f  → метры на пиксель
+        t_m = t_norm * baseline                 # переводим в метры
+
         # Накопление глобальной позы
         self.R_prev = self.R_prev @ R
-        self.t_prev = self.t_prev + self.R_prev @ t
-
-        # Текущая позиция
-        pose = [self.t_prev[0, 0], self.t_prev[1, 0], self.t_prev[2, 0]]
-        pose_scaled = [p * scale_factor for p in pose]
-
-        # Лог
-        print(f"Pose: {pose}, scaled: {pose_scaled}")
+        self.t_prev = self.t_prev + (self.R_prev @ t_m.reshape(3, 1))
+        pose = self.t_prev.flatten().tolist()
 
         # Сохранение состояния
+        self.trajectory.append(pose)
         self.last_kp = kp
         self.last_desc = desc
-        self.trajectory.append(pose_scaled)
 
-        return pose_scaled
+        return pose
 
     def get_trajectory(
             self
