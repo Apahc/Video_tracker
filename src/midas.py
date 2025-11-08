@@ -52,7 +52,12 @@ class MiDaSEstimator:
         """
         self.device = torch.device(device)
         print(f"[MiDaS] Загрузка на {device}...")
-        self.model = torch.hub.load("intel-isl/MiDaS", "MiDaS_small", pretrained=True)
+
+        # Отключаем кэш
+        torch.hub.set_dir("C:/temp/midas_cache")
+        self.model = torch.hub.load(
+            "intel-isl/MiDaS", "MiDaS_small", pretrained=True,
+        )
         self.model.to(self.device)
         self.model.eval()
 
@@ -99,15 +104,15 @@ class MiDaSEstimator:
         """
         # 1. Конвертация цветового пространства
         img_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
-        original_h, original_w = img_rgb.shape[:2]
+        h, w = img_rgb.shape[:2]
 
         # 2. Паддинг до кратности 32 (требование CNN)
-        h = ((original_h + 31) // 32) * 32
-        w = ((original_w + 31) // 32) * 32
+        pad_h = ((h + 31) // 32) * 32
+        pad_w = ((w + 31) // 32) * 32
         img_padded = cv2.copyMakeBorder(
             img_rgb,
-            0, h - original_h,
-            0, w - original_w,
+            0, pad_h - h,
+            0, pad_w - w,
             cv2.BORDER_REFLECT_101  # Отражение для минимизации артефактов
         )
 
@@ -123,19 +128,12 @@ class MiDaSEstimator:
         # 6. Ресайз до оригинального размера
         depth = cv2.resize(
             depth.cpu().numpy(),
-            (original_w, original_h),
+            (w, h),
             interpolation=cv2.INTER_CUBIC
         )
 
-        # 7. Нормализация до 10 метров
-        depth_max = depth.max()
-        if depth_max > 0:
-            depth_m = depth / (depth_max + 1e-6) * 10.0
-        else:
-            depth_m = depth.copy()
+        # 7. Средняя глубина с фильтром шума
+        valid = depth[depth > 0.1]
+        mean_depth = float(np.mean(valid)) if valid.size > 0 else 1.0
 
-        # 8. Средняя глубина с фильтром шума
-        valid_depth = depth_m[depth_m > 0.1]
-        mean_depth = float(np.mean(valid_depth)) if valid_depth.size > 0 else 0.0
-
-        return depth_m, mean_depth
+        return depth, mean_depth
