@@ -57,10 +57,10 @@ def main():
     print("=" * 50)
 
     # Параметры калибровки для вашего видео
-    REAL_DISTANCE = 82.0  # Реальное расстояние в метрах из вашего описания
+    REAL_DISTANCE = 10.0  # Реальное расстояние в метрах из вашего описания
 
     # Анализ существующего файла
-    json_file = "../data/output/forest_walk_analysis.json"
+    json_file = "data/output/my_video_10m_analysis.json"
 
     if Path(json_file).exists():
         measured = analyze_trajectory(json_file)

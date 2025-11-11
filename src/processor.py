@@ -4,9 +4,10 @@ import json
 import time
 import logging
 from pathlib import Path
+from matplotlib.gridspec import GridSpecFromSubplotSpec
 
 # ИСПРАВЛЕННЫЙ ИМПОРТ
-from slam_wrapper import HighAccuracyVisualOdometry
+from src.slam_wrapper import HighAccuracyVisualOdometry
 
 # Настройка логирования
 logging.basicConfig(
@@ -38,7 +39,7 @@ def get_video_info(video_path):
 class FullFeatureProcessor:
     """Полнофункциональный процессор видео с повышенной точностью"""
 
-    def __init__(self, input_dir, output_dir, scale_factor=3.35):
+    def __init__(self, input_dir, output_dir, scale_factor=9.3):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -274,7 +275,30 @@ class FullFeatureProcessor:
             ax_legend = plt.subplot(gs[0, 1])
             ax_legend.axis('off')  # Скрываем оси
 
-            # Создаем элементы для легенды
+            # Создаём вложенную сетку: 2 строки, 1 столбец
+            inner_gs = GridSpecFromSubplotSpec(2, 1, subplot_spec=gs[0, 1],
+                                               height_ratios=[1, 2.2], hspace=0.4)
+
+            # --- Верхняя часть: текстовая информация ---
+            ax_info = plt.subplot(inner_gs[0])
+            ax_info.axis('off')
+
+            total_distance = self._calculate_distance(trajectory)
+            info_text = f"Общее расстояние: {total_distance:.1f} м\n"
+            info_text += f"Всего поворотов: {len(turn_points)}\n"
+            info_text += f"Точек траектории: {len(trajectory)}"
+
+            ax_info.text(0.05, 0.95, info_text,
+                         transform=ax_info.transAxes,
+                         fontsize=11,
+                         verticalalignment='top',
+                         bbox=dict(boxstyle="round,pad=0.5", fc='lightblue', alpha=0.7))
+
+            # --- Нижняя часть: легенда ---
+            ax_leg = plt.subplot(inner_gs[1])
+            ax_leg.axis('off')
+
+            # Элементы легенды
             legend_elements = [
                 plt.Line2D([0], [0], color='blue', linewidth=3, label='Траектория движения'),
                 plt.Line2D([0], [0], marker='o', color='green', markersize=8,
@@ -291,23 +315,12 @@ class FullFeatureProcessor:
                                label=f'Правые повороты ({sum(1 for t in turn_points if t["turn_type"] == "right")} шт.)')
                 ])
 
-            # Добавляем общую информацию
-            total_distance = self._calculate_distance(trajectory)
-            info_text = f"Общее расстояние: {total_distance:.1f} м\n"
-            info_text += f"Всего поворотов: {len(turn_points)}\n"
-            info_text += f"Точек траектории: {len(trajectory)}"
-
-            ax_legend.text(0.1, 0.8, info_text, transform=ax_legend.transAxes,
-                           fontsize=11, verticalalignment='top',
-                           bbox=dict(boxstyle="round,pad=0.5", fc='lightblue', alpha=0.7))
-
-            # РАЗМЕЩАЕМ ЛЕГЕНДУ
-            ax_legend.legend(handles=legend_elements,
-                             loc='center left',
-                             fontsize=10,
-                             framealpha=0.9,
-                             fancybox=True,
-                             shadow=True)
+            ax_leg.legend(handles=legend_elements,
+                          loc='upper left',
+                          fontsize=10,
+                          framealpha=0.9,
+                          fancybox=True,
+                          shadow=True)
 
             # График поворотов (второй ряд)
             ax2 = plt.subplot(gs[1, :])  # Занимает всю ширину снизу

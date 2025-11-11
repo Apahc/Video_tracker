@@ -2,6 +2,7 @@ import sys
 import os
 import argparse
 from pathlib import Path
+from src.processor import FullFeatureProcessor
 
 # Добавляем src в путь Python для корректных импортов
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -9,14 +10,12 @@ src_path = os.path.join(current_dir, 'src')
 if src_path not in sys.path:
     sys.path.append(src_path)
 
-from processor import FullFeatureProcessor
-
 
 def process_single_video(video_filename, scale_factor=3.35):
     """Обработка конкретного видеофайла"""
 
-    input_dir = "../data/input"
-    output_dir = "../data/output"
+    input_dir = "data/input"
+    output_dir = "data/output"
 
     # Создаем директории
     Path(input_dir).mkdir(parents=True, exist_ok=True)
@@ -55,7 +54,7 @@ def process_single_video(video_filename, scale_factor=3.35):
 
 def list_input_files():
     """Показать файлы в папке input"""
-    input_dir = Path("../data/input")
+    input_dir = Path("data/input")
     if input_dir.exists():
         video_files = list(input_dir.glob("*.mp4")) + list(input_dir.glob("*.avi")) + list(input_dir.glob("*.mov"))
         if video_files:
@@ -71,7 +70,7 @@ def list_input_files():
 def main():
     parser = argparse.ArgumentParser(description='SLAM обработка видео')
     parser.add_argument('filename', nargs='?', help='Имя видеофайла в папке data/input')
-    parser.add_argument('--scale', type=float, default=3.35, help='Коэффициент масштабирования')
+    parser.add_argument('--scale', type=float, default=9.3, help='Коэффициент масштабирования')
     parser.add_argument('--list', action='store_true', help='Показать доступные файлы')
 
     args = parser.parse_args()
@@ -96,8 +95,8 @@ def main():
 
         filename = input("\n📹 Введите имя файла для обработки: ").strip()
         if filename:
-            scale_input = input("📏 Введите масштаб (Enter для 3.35): ").strip()
-            scale_factor = float(scale_input) if scale_input else 3.35
+            scale_input = input("📏 Введите масштаб (Enter для 9.3): ").strip()
+            scale_factor = float(scale_input) if scale_input else 9.3
             process_single_video(filename, scale_factor)
         else:
             print("❌ Не указан файл для обработки")
