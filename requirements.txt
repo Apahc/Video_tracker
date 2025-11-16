@@ -1,3 +1,6 @@
+tqdm==4.66.1
+vidstab==1.7.4
+
 opencv-python>=4.9.0
 numpy>=1.26.0
 scipy>=1.13.0
