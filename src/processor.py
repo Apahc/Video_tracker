@@ -39,7 +39,7 @@ def get_video_info(video_path):
 class FullFeatureProcessor:
     """Полнофункциональный процессор видео с повышенной точностью"""
 
-    def __init__(self, input_dir, output_dir, scale_factor=9.3):
+    def __init__(self, input_dir, output_dir, scale_factor=12.306):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)

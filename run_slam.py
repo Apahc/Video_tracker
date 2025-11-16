@@ -95,8 +95,8 @@ def main():
 
         filename = input("\n📹 Введите имя файла для обработки: ").strip()
         if filename:
-            scale_input = input("📏 Введите масштаб (Enter для 9.3): ").strip()
-            scale_factor = float(scale_input) if scale_input else 9.3
+            scale_input = input("📏 Введите масштаб (Enter для 12.306): ").strip()
+            scale_factor = float(scale_input) if scale_input else 12.306
             process_single_video(filename, scale_factor)
         else:
             print("❌ Не указан файл для обработки")
