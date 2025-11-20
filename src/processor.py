@@ -45,7 +45,7 @@ class FullFeatureProcessor:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         # ИСПРАВЛЕННАЯ ИНИЦИАЛИЗАЦИЯ
-        self.vo = HighAccuracyVisualOdometry(use_deep_learning=True, scale_factor=scale_factor)
+        self.vo = HighAccuracyVisualOdometry(scale_factor=scale_factor)
 
         logger.info(f"Инициализирован FullFeatureProcessor с scale_factor={scale_factor}")
 
@@ -188,187 +188,159 @@ class FullFeatureProcessor:
             json.dump(output_data, f, indent=2, ensure_ascii=False)
 
         # Создаем улучшенную визуализацию
-        self._create_enhanced_visualization(result["trajectory"], result["turn_points"], video_path.stem)
+        # === ПОВОРАЧИВАЕМ ТРАЕКТОРИЮ ТАК, ЧТОБЫ СТАРТ СМОТРЕЛ ВВЕРХ (0,1) ===
+        trajectory = result["trajectory"]
+        turn_points = result["turn_points"]
+
+        if len(trajectory) > 50:
+            # берём вектор от старта к 50-й точке (чтобы не брать шум на первых кадрах)
+            dx = trajectory[50][0] - trajectory[0][0]
+            dy = trajectory[50][1] - trajectory[0][1]
+
+            # угол поворота всей траектории, чтобы этот вектор стал (0,1)
+            angle_rad = np.arctan2(dx, dy)  # atan2(x, y) → угол от вектора (dy, dx) к (0,1)
+            cos_a = np.cos(-angle_rad)
+            sin_a = np.sin(-angle_rad)
+
+            # поворачиваем все точки траектории
+            rotated_traj = []
+            for p in trajectory:
+                rx = p[0] * cos_a - p[1] * sin_a
+                ry = p[0] * sin_a + p[1] * cos_a
+                rotated_traj.append([rx, ry, p[2]])
+
+            # поворачиваем точки поворотов тоже
+            rotated_turns = []
+            for t in turn_points:
+                rx = t['position'][0] * cos_a - t['position'][1] * sin_a
+                ry = t['position'][0] * sin_a + t['position'][1] * cos_a
+                new_pos = t['position'].copy()
+                new_pos[0], new_pos[1] = rx, ry
+                new_t = t.copy()
+                new_t['position'] = new_pos
+                rotated_turns.append(new_t)
+        else:
+            rotated_traj = trajectory
+            rotated_turns = turn_points
+
+        # теперь рисуем уже повёрнутую траекторию
+        self._create_enhanced_visualization(rotated_traj, rotated_turns, video_path.stem)
 
         logger.info(f"💾 Результаты сохранены: {output_path}")
         print(f"💾 Результаты сохранены: {output_path}")
 
     def _create_enhanced_visualization(self, trajectory, turn_points, video_name):
-        """Создание визуализации траектории с легендой вне графика"""
+        """Создание ИДЕАЛЬНО КВАДРАТНОЙ визуализации траектории с легендой снаружи"""
         try:
             import matplotlib.pyplot as plt
             import numpy as np
+            from matplotlib.gridspec import GridSpec
 
-            # Конвертируем в метры
+            # Данные
             x = [p[0] for p in trajectory]
             y = [p[1] for p in trajectory]
 
-            # РАССЧИТЫВАЕМ оптимальный размер фигуры
-            x_range = max(x) - min(x)
-            y_range = max(y) - min(y)
+            if not x or not y:
+                print("Траектория пуста — график не создан")
+                return
 
-            # УВЕЛИЧИВАЕМ ширину для легенды справа
-            if max(x_range, y_range) > 100:
-                fig_size = (22, 16)  # Шире для легенды
-            elif max(x_range, y_range) > 50:
-                fig_size = (18, 12)
-            elif max(x_range, y_range) > 20:
-                fig_size = (16, 10)
-            else:
-                fig_size = (14, 8)
+            # Вычисляем максимальный диапазон, чтобы сделать график квадратным
+            x_min, x_max = min(x), max(x)
+            y_min, y_max = min(y), max(y)
+            range_x = x_max - x_min
+            range_y = y_max - y_min
+            max_range = max(range_x, range_y, 1.0)  # избежим деления на 0
 
-            # СОЗДАЕМ фигуру с дополнительным местом для легенды
-            fig = plt.figure(figsize=fig_size)
+            center_x = (x_min + x_max) / 2
+            center_y = (y_min + y_max) / 2
 
-            # СОЗДАЕМ сетку: основной график занимает 75%, легенда - 25%
-            from matplotlib.gridspec import GridSpec
-            gs = GridSpec(2, 2, width_ratios=[3, 1], height_ratios=[1, 1])
+            # Создаём квадратную фигуру
+            fig = plt.figure(figsize=(14, 14))
+            gs = GridSpec(2, 2, width_ratios=[7, 3], height_ratios=[3, 1], wspace=0.3, hspace=0.4)
 
-            # Основной график траектории (занимает левую часть)
+            # Основной график — квадратный
             ax1 = plt.subplot(gs[0, 0])
+            ax1.plot(x, y, 'b-', linewidth=2.5, alpha=0.8)
+            ax1.plot(x[0], y[0], 'go', markersize=12, label='Старт')
+            ax1.plot(x[-1], y[-1], 'ro', markersize=12, label='Финиш')
 
-            # ОСНОВНОЙ ПРОЦЕСС: строим траекторию
-            line, = ax1.plot(x, y, 'b-', alpha=0.7, linewidth=2)
-            start_point, = ax1.plot(x[0], y[0], 'go', markersize=8)
-            end_point, = ax1.plot(x[-1], y[-1], 'ro', markersize=8)
-
-            scatter_handles = []
             if turn_points:
-                turn_x = [turn['position'][0] for turn in turn_points]
-                turn_y = [turn['position'][1] for turn in turn_points]
+                turn_x = [t['position'][0] for t in turn_points]
+                turn_y = [t['position'][1] for t in turn_points]
+                colors = ['orange' if t['turn_type'] == 'left' else 'purple' for t in turn_points]
+                ax1.scatter(turn_x, turn_y, c=colors, s=100, zorder=5, edgecolors='black', linewidth=1)
 
-                colors = ['orange' if turn['turn_type'] == 'left' else 'purple' for turn in turn_points]
-                scatter = ax1.scatter(turn_x, turn_y, c=colors, s=50, alpha=0.9)
-                scatter_handles.append(scatter)
+                for i, (tx, ty) in enumerate(zip(turn_x, turn_y), 1):
+                    ax1.annotate(str(i), (tx, ty),
+                                 xytext=(8, 8), textcoords='offset points',
+                                 fontsize=11, fontweight='bold',
+                                 bbox=dict(boxstyle="circle,pad=0.3", fc="white", ec="black", lw=1))
 
-                # ПРОСТЫЕ подписи поворотов (только номера)
-                for i, turn in enumerate(turn_points):
-                    ax1.annotate(f"{i + 1}",
-                                 (turn_x[i], turn_y[i]),
-                                 xytext=(5, 5), textcoords='offset points',
-                                 fontsize=8, fontweight='bold',
-                                 bbox=dict(boxstyle="circle,pad=0.2", fc='white', alpha=0.8))
+            # Делаем оси строго квадратными
+            ax1.set_xlim(center_x - max_range/2 - max_range*0.05, center_x + max_range/2 + max_range*0.05)
+            ax1.set_ylim(center_y - max_range/2 - max_range*0.05, center_y + max_range/2 + max_range*0.05)
+            ax1.set_aspect('equal', adjustable='box')
 
-            # НАСТРОЙКА ОСЕЙ основного графика
-            ax1.set_aspect('equal', adjustable='datalim')
+            ax1.grid(True, alpha=0.4, linestyle='--')
+            ax1.set_xlabel('X (метры)', fontsize=12)
+            ax1.set_ylabel('Y (метры)', fontsize=12)
+            ax1.set_title(f'Траектория движения: {video_name}', fontsize=14, fontweight='bold', pad=20)
 
-            # Добавляем запас вокруг данных
-            x_margin = x_range * 0.1
-            y_margin = y_range * 0.1
-
-            ax1.set_xlim(min(x) - x_margin, max(x) + x_margin)
-            ax1.set_ylim(min(y) - y_margin, max(y) + y_margin)
-
-            # Автоматическая сетка
-            grid_step = self._calculate_grid_step(max(x_range, y_range))
-            ax1.set_xticks(np.arange(np.floor(min(x) - x_margin),
-                                     np.ceil(max(x) + x_margin) + grid_step, grid_step))
-            ax1.set_yticks(np.arange(np.floor(min(y) - y_margin),
-                                     np.ceil(max(y) + y_margin) + grid_step, grid_step))
-
-            ax1.grid(True, alpha=0.3)
-            ax1.set_xlabel('Расстояние по X (метры)', fontsize=11)
-            ax1.set_ylabel('Расстояние по Y (метры)', fontsize=11)
-            ax1.set_title(f'Траектория движения: {video_name}', fontsize=13, fontweight='bold', pad=15)
-
-            # ЛЕГЕНДА ВНЕ ГРАФИКА (справа)
-            ax_legend = plt.subplot(gs[0, 1])
-            ax_legend.axis('off')  # Скрываем оси
-
-            # Создаём вложенную сетку: 2 строки, 1 столбец
-            inner_gs = GridSpecFromSubplotSpec(2, 1, subplot_spec=gs[0, 1],
-                                               height_ratios=[1, 2.2], hspace=0.4)
-
-            # --- Верхняя часть: текстовая информация ---
-            ax_info = plt.subplot(inner_gs[0])
+            # Легенда и информация справа
+            ax_info = plt.subplot(gs[0, 1])
             ax_info.axis('off')
 
             total_distance = self._calculate_distance(trajectory)
-            info_text = f"Общее расстояние: {total_distance:.1f} м\n"
-            info_text += f"Всего поворотов: {len(turn_points)}\n"
-            info_text += f"Точек траектории: {len(trajectory)}"
+            info_text = f"Дистанция: {total_distance:.1f} м\n"
+            info_text += f"Точек траектории: {len(trajectory)}\n"
+            info_text += f"Обнаружено поворотов: {len(turn_points)}"
 
-            ax_info.text(0.05, 0.95, info_text,
-                         transform=ax_info.transAxes,
-                         fontsize=11,
-                         verticalalignment='top',
-                         bbox=dict(boxstyle="round,pad=0.5", fc='lightblue', alpha=0.7))
+            ax_info.text(0.05, 0.95, info_text, transform=ax_info.transAxes, fontsize=13,
+                         verticalalignment='top', bbox=dict(boxstyle="round,pad=1", fc="lightblue", alpha=0.9))
 
-            # --- Нижняя часть: легенда ---
-            ax_leg = plt.subplot(inner_gs[1])
-            ax_leg.axis('off')
-
-            # Элементы легенды
             legend_elements = [
-                plt.Line2D([0], [0], color='blue', linewidth=3, label='Траектория движения'),
-                plt.Line2D([0], [0], marker='o', color='green', markersize=8,
-                           label=f'Начало ({x[0]:.1f}, {y[0]:.1f})'),
-                plt.Line2D([0], [0], marker='o', color='red', markersize=8,
-                           label=f'Конец ({x[-1]:.1f}, {y[-1]:.1f})')
+                plt.Line2D([0], [0], color='blue', lw=4, label='Траектория'),
+                plt.Line2D([0], [0], marker='o', color='green', markersize=12, linestyle='None', label='Старт'),
+                plt.Line2D([0], [0], marker='o', color='red', markersize=12, linestyle='None', label='Финиш')
             ]
-
             if turn_points:
-                legend_elements.extend([
-                    plt.Line2D([0], [0], marker='o', color='orange', markersize=8,
-                               label=f'Левые повороты ({sum(1 for t in turn_points if t["turn_type"] == "left")} шт.)'),
-                    plt.Line2D([0], [0], marker='o', color='purple', markersize=8,
-                               label=f'Правые повороты ({sum(1 for t in turn_points if t["turn_type"] == "right")} шт.)')
-                ])
+                left_cnt = sum(1 for t in turn_points if t['turn_type'] == 'left')
+                right_cnt = len(turn_points) - left_cnt
+                legend_elements += [
+                    plt.Line2D([0], [0], marker='o', color='orange', markersize=12, linestyle='None', label=f'Левые ({left_cnt})'),
+                    plt.Line2D([0], [0], marker='o', color='purple', markersize=12, linestyle='None', label=f'Правые ({right_cnt})')
+                ]
 
-            ax_leg.legend(handles=legend_elements,
-                          loc='upper left',
-                          fontsize=10,
-                          framealpha=0.9,
-                          fancybox=True,
-                          shadow=True)
+            ax_info.legend(handles=legend_elements, loc='center left', fontsize=12, frameon=True, fancybox=True, shadow=True)
 
-            # График поворотов (второй ряд)
-            ax2 = plt.subplot(gs[1, :])  # Занимает всю ширину снизу
-
+            # Гистограмма поворотов снизу
+            ax2 = plt.subplot(gs[1, :])
             if turn_points:
-                turn_numbers = list(range(1, len(turn_points) + 1))
-                turn_angles = [turn['angle_degrees'] for turn in turn_points]
-
-                colors = ['orange' if turn['turn_type'] == 'left' else 'purple' for turn in turn_points]
-                bars = ax2.bar(turn_numbers, turn_angles, color=colors, alpha=0.7, width=0.7)
-
-                # Подписи значений
-                for bar, angle in zip(bars, turn_angles):
-                    height = bar.get_height()
-                    va = 'bottom' if height >= 0 else 'top'
-                    offset = 1 if height >= 0 else -1
-                    ax2.text(bar.get_x() + bar.get_width() / 2, height + offset,
-                             f'{angle:.0f}°', ha='center', va=va, fontsize=9, fontweight='bold')
-
-                ax2.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
-                ax2.set_xlabel('Номер поворота', fontsize=11)
-                ax2.set_ylabel('Угол поворота (°)', fontsize=11)
-                ax2.set_title('Углы обнаруженных поворотов', fontsize=13, fontweight='bold', pad=15)
-                ax2.grid(True, alpha=0.3, axis='y')
-                ax2.set_xticks(turn_numbers)
-
+                nums = list(range(1, len(turn_points) + 1))
+                angles = [t['angle_degrees'] for t in turn_points]
+                colors = ['orange' if t['turn_type'] == 'left' else 'purple' for t in turn_points]
+                bars = ax2.bar(nums, angles, color=colors, alpha=0.8, edgecolor='black', linewidth=0.8)
+                for bar, ang in zip(bars, angles):
+                    ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+                             f'{ang:.0f}°', ha='center', va='bottom', fontweight='bold')
+                ax2.set_xlabel('Номер поворота')
+                ax2.set_ylabel('Угол (°)')
+                ax2.set_title('Углы поворотов', fontweight='bold')
+                ax2.grid(True, axis='y', alpha=0.3)
             else:
-                ax2.text(0.5, 0.5, 'Повороты не обнаружены',
-                         ha='center', va='center', transform=ax2.transAxes, fontsize=12)
-                ax2.set_xticks([])
-                ax2.set_yticks([])
+                ax2.text(0.5, 0.5, 'Повороты не обнаружены', ha='center', va='center',
+                         transform=ax2.transAxes, fontsize=14, fontweight='bold')
 
-            # ГАРАНТИРУЕМ, что все помещается
-            plt.tight_layout(pad=3.0)
+            plt.tight_layout()
 
-            # Сохраняем
-            plot_path = self.output_dir / f"{video_name}_trajectory_enhanced.png"
-            plt.savefig(plot_path, dpi=150, bbox_inches='tight',
-                        facecolor='white', edgecolor='none',
-                        pad_inches=0.3)
+            plot_path = self.output_dir / f"{video_name}_trajectory_square.png"
+            plt.savefig(plot_path, dpi=200, bbox_inches='tight', facecolor='white')
+            plt.close(fig)
 
-            plt.close()
-
-            print(f"📈 График сохранен: {plot_path}")
-            print(f"📍 Легенда вынесена за пределы графика")
+            print(f"Квадратный график сохранён: {plot_path.name}")
 
         except Exception as e:
-            print(f"⚠️ Ошибка создания графика: {e}")
+            print(f"Ошибка при создании графика: {e}")
 
     def _calculate_grid_step(self, range_size):
         """Рассчитывает оптимальный шаг сетки"""

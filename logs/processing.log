@@ -187,3 +187,492 @@
 2025-11-11 12:42:50,960 - processor - INFO - 📊 Результаты: 349 точек траектории
 2025-11-11 12:42:50,960 - processor - INFO - 📏 Дистанция: 10.90 единиц (масштаб: 3.356)
 2025-11-11 12:42:50,960 - processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-17 19:46:14,258 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 19:46:14,259 - src.processor - INFO - 🚀 Начало обработки: my_video_2_stable.mp4
+2025-11-17 19:46:14,993 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 29.6 FPS, 30.0 сек
+2025-11-17 19:46:51,293 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 19:46:51,432 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 19:46:51,807 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_stable_analysis.json
+2025-11-17 19:46:51,807 - src.processor - INFO - ✅ Обработка завершена: my_video_2_stable.mp4
+2025-11-17 19:46:51,807 - src.processor - INFO - 📊 Результаты: 218 точек траектории
+2025-11-17 19:46:51,807 - src.processor - INFO - 📏 Дистанция: 38.00 единиц (масштаб: 12.306)
+2025-11-17 19:46:51,807 - src.processor - INFO - 🔄 Обнаружено поворотов: 12
+2025-11-17 20:13:23,260 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 20:13:23,261 - src.processor - INFO - 🚀 Начало обработки: my_video_2_vidstab_stabilize.mp4
+2025-11-17 20:13:23,267 - src.processor - INFO - 📹 Информация о видео: 1340x2180, 30.0 FPS, 30.0 сек
+2025-11-17 20:13:50,458 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:13:50,546 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:13:50,760 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_vidstab_stabilize_analysis.json
+2025-11-17 20:13:50,761 - src.processor - INFO - ✅ Обработка завершена: my_video_2_vidstab_stabilize.mp4
+2025-11-17 20:13:50,761 - src.processor - INFO - 📊 Результаты: 209 точек траектории
+2025-11-17 20:13:50,761 - src.processor - INFO - 📏 Дистанция: 22.74 единиц (масштаб: 12.306)
+2025-11-17 20:13:50,761 - src.processor - INFO - 🔄 Обнаружено поворотов: 11
+2025-11-17 20:35:21,834 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 20:35:21,843 - src.processor - INFO - 🚀 Начало обработки: my_video_2_vidstab_stabilize.mp4
+2025-11-17 20:35:21,863 - src.processor - INFO - 📹 Информация о видео: 1520x2360, 30.0 FPS, 30.0 сек
+2025-11-17 20:36:03,853 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:36:03,955 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:36:04,215 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_vidstab_stabilize_analysis.json
+2025-11-17 20:36:04,216 - src.processor - INFO - ✅ Обработка завершена: my_video_2_vidstab_stabilize.mp4
+2025-11-17 20:36:04,216 - src.processor - INFO - 📊 Результаты: 129 точек траектории
+2025-11-17 20:36:04,216 - src.processor - INFO - 📏 Дистанция: 7.76 единиц (масштаб: 12.306)
+2025-11-17 20:36:04,216 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-17 20:42:59,946 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 20:42:59,948 - src.processor - INFO - 🚀 Начало обработки: my_video_1_vidstab_stabilize.mp4
+2025-11-17 20:42:59,968 - src.processor - INFO - 📹 Информация о видео: 2360x1520, 28.0 FPS, 35.0 сек
+2025-11-17 20:43:36,204 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:43:36,277 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:43:36,551 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_vidstab_stabilize_analysis.json
+2025-11-17 20:43:36,551 - src.processor - INFO - ✅ Обработка завершена: my_video_1_vidstab_stabilize.mp4
+2025-11-17 20:43:36,551 - src.processor - INFO - 📊 Результаты: 69 точек траектории
+2025-11-17 20:43:36,551 - src.processor - INFO - 📏 Дистанция: 18.92 единиц (масштаб: 12.306)
+2025-11-17 20:43:36,551 - src.processor - INFO - 🔄 Обнаружено поворотов: 3
+2025-11-17 20:53:08,156 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 20:53:08,157 - src.processor - INFO - 🚀 Начало обработки: my_video_1_vidstab_stabilize.mp4
+2025-11-17 20:53:08,162 - src.processor - INFO - 📹 Информация о видео: 2420x1580, 28.0 FPS, 35.0 сек
+2025-11-17 20:53:38,599 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:53:38,648 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 20:53:38,839 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_vidstab_stabilize_analysis.json
+2025-11-17 20:53:38,839 - src.processor - INFO - ✅ Обработка завершена: my_video_1_vidstab_stabilize.mp4
+2025-11-17 20:53:38,839 - src.processor - INFO - 📊 Результаты: 68 точек траектории
+2025-11-17 20:53:38,839 - src.processor - INFO - 📏 Дистанция: 20.91 единиц (масштаб: 12.306)
+2025-11-17 20:53:38,839 - src.processor - INFO - 🔄 Обнаружено поворотов: 3
+2025-11-17 20:59:42,406 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 20:59:42,408 - src.processor - INFO - 🚀 Начало обработки: my_video_2_vidstab_stabilize.mp4
+2025-11-17 20:59:42,432 - src.processor - INFO - 📹 Информация о видео: 1580x2420, 30.0 FPS, 30.0 сек
+2025-11-17 21:00:30,881 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:00:30,958 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:00:31,166 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_vidstab_stabilize_analysis.json
+2025-11-17 21:00:31,167 - src.processor - INFO - ✅ Обработка завершена: my_video_2_vidstab_stabilize.mp4
+2025-11-17 21:00:31,167 - src.processor - INFO - 📊 Результаты: 122 точек траектории
+2025-11-17 21:00:31,167 - src.processor - INFO - 📏 Дистанция: 11.32 единиц (масштаб: 12.306)
+2025-11-17 21:00:31,167 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-17 21:14:45,866 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 21:14:45,868 - src.processor - INFO - 🚀 Начало обработки: my_video_1_BEST_stabilized.mp4
+2025-11-17 21:14:45,883 - src.processor - INFO - 📹 Информация о видео: 2480x1640, 28.0 FPS, 35.0 сек
+2025-11-17 21:15:29,606 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:15:29,719 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:15:30,023 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_BEST_stabilized_analysis.json
+2025-11-17 21:15:30,023 - src.processor - INFO - ✅ Обработка завершена: my_video_1_BEST_stabilized.mp4
+2025-11-17 21:15:30,023 - src.processor - INFO - 📊 Результаты: 59 точек траектории
+2025-11-17 21:15:30,023 - src.processor - INFO - 📏 Дистанция: 20.21 единиц (масштаб: 12.306)
+2025-11-17 21:15:30,023 - src.processor - INFO - 🔄 Обнаружено поворотов: 3
+2025-11-17 21:19:03,365 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 21:19:03,367 - src.processor - INFO - 🚀 Начало обработки: my_video_2_BEST_stabilized.mp4
+2025-11-17 21:19:03,385 - src.processor - INFO - 📹 Информация о видео: 1640x2480, 30.0 FPS, 30.0 сек
+2025-11-17 21:19:36,341 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:19:36,389 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:19:36,575 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_BEST_stabilized_analysis.json
+2025-11-17 21:19:36,576 - src.processor - INFO - ✅ Обработка завершена: my_video_2_BEST_stabilized.mp4
+2025-11-17 21:19:36,576 - src.processor - INFO - 📊 Результаты: 124 точек траектории
+2025-11-17 21:19:36,576 - src.processor - INFO - 📏 Дистанция: 10.22 единиц (масштаб: 12.306)
+2025-11-17 21:19:36,576 - src.processor - INFO - 🔄 Обнаружено поворотов: 5
+2025-11-17 21:25:59,520 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 21:25:59,520 - src.processor - INFO - 🚀 Начало обработки: my_video_1_BEST_stabilized.mp4
+2025-11-17 21:25:59,527 - src.processor - INFO - 📹 Информация о видео: 2480x1640, 28.0 FPS, 35.0 сек
+2025-11-17 21:26:28,483 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:26:28,527 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:26:28,700 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_BEST_stabilized_analysis.json
+2025-11-17 21:26:28,700 - src.processor - INFO - ✅ Обработка завершена: my_video_1_BEST_stabilized.mp4
+2025-11-17 21:26:28,700 - src.processor - INFO - 📊 Результаты: 56 точек траектории
+2025-11-17 21:26:28,700 - src.processor - INFO - 📏 Дистанция: 17.49 единиц (масштаб: 12.306)
+2025-11-17 21:26:28,700 - src.processor - INFO - 🔄 Обнаружено поворотов: 2
+2025-11-17 21:29:23,242 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-17 21:29:23,243 - src.processor - INFO - 🚀 Начало обработки: my_video_2_BEST_stabilized.mp4
+2025-11-17 21:29:23,290 - src.processor - INFO - 📹 Информация о видео: 1640x2480, 30.0 FPS, 30.0 сек
+2025-11-17 21:29:55,448 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:29:55,493 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-17 21:29:55,676 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_BEST_stabilized_analysis.json
+2025-11-17 21:29:55,676 - src.processor - INFO - ✅ Обработка завершена: my_video_2_BEST_stabilized.mp4
+2025-11-17 21:29:55,676 - src.processor - INFO - 📊 Результаты: 121 точек траектории
+2025-11-17 21:29:55,677 - src.processor - INFO - 📏 Дистанция: 9.38 единиц (масштаб: 12.306)
+2025-11-17 21:29:55,677 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 14:23:05,720 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 14:23:05,722 - src.processor - INFO - 🚀 Начало обработки: my_video_2_vidstab_overlay.mp4
+2025-11-19 14:23:05,768 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 14:23:30,700 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:23:30,772 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:23:31,008 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_vidstab_overlay_analysis.json
+2025-11-19 14:23:31,008 - src.processor - INFO - ✅ Обработка завершена: my_video_2_vidstab_overlay.mp4
+2025-11-19 14:23:31,008 - src.processor - INFO - 📊 Результаты: 98 точек траектории
+2025-11-19 14:23:31,008 - src.processor - INFO - 📏 Дистанция: 15.92 единиц (масштаб: 12.306)
+2025-11-19 14:23:31,008 - src.processor - INFO - 🔄 Обнаружено поворотов: 5
+2025-11-19 14:23:56,660 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 14:23:56,661 - src.processor - INFO - 🚀 Начало обработки: my_video_2_vidstab_stabilize.mp4
+2025-11-19 14:23:56,666 - src.processor - INFO - 📹 Информация о видео: 1340x2180, 30.0 FPS, 30.0 сек
+2025-11-19 14:24:29,124 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:24:29,181 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:24:29,446 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_vidstab_stabilize_analysis.json
+2025-11-19 14:24:29,447 - src.processor - INFO - ✅ Обработка завершена: my_video_2_vidstab_stabilize.mp4
+2025-11-19 14:24:29,447 - src.processor - INFO - 📊 Результаты: 209 точек траектории
+2025-11-19 14:24:29,447 - src.processor - INFO - 📏 Дистанция: 22.74 единиц (масштаб: 12.306)
+2025-11-19 14:24:29,447 - src.processor - INFO - 🔄 Обнаружено поворотов: 11
+2025-11-19 14:40:52,771 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 14:40:52,772 - src.processor - INFO - 🚀 Начало обработки: my_video_2_final_stabilize.mp4
+2025-11-19 14:40:52,803 - src.processor - INFO - 📹 Информация о видео: 1380x2220, 30.0 FPS, 30.0 сек
+2025-11-19 14:41:22,058 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:41:22,207 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 14:41:22,805 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_final_stabilize_analysis.json
+2025-11-19 14:41:22,805 - src.processor - INFO - ✅ Обработка завершена: my_video_2_final_stabilize.mp4
+2025-11-19 14:41:22,805 - src.processor - INFO - 📊 Результаты: 231 точек траектории
+2025-11-19 14:41:22,805 - src.processor - INFO - 📏 Дистанция: 26.28 единиц (масштаб: 12.306)
+2025-11-19 14:41:22,805 - src.processor - INFO - 🔄 Обнаружено поворотов: 12
+2025-11-19 15:45:07,877 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 15:45:07,879 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_BEST.mp4
+2025-11-19 15:45:07,889 - src.processor - INFO - 📹 Информация о видео: 1250x2090, 30.0 FPS, 30.0 сек
+2025-11-19 15:45:31,406 - matplotlib.axes._base - WARNING - Ignoring fixed x limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 15:45:31,549 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 15:45:31,930 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_BEST_analysis.json
+2025-11-19 15:45:31,930 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_BEST.mp4
+2025-11-19 15:45:31,930 - src.processor - INFO - 📊 Результаты: 224 точек траектории
+2025-11-19 15:45:31,930 - src.processor - INFO - 📏 Дистанция: 24.93 единиц (масштаб: 12.306)
+2025-11-19 15:45:31,930 - src.processor - INFO - 🔄 Обнаружено поворотов: 12
+2025-11-19 17:21:07,776 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:21:07,778 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:21:07,806 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:21:40,058 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:21:40,222 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:21:40,633 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:21:40,633 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:21:40,633 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:21:40,633 - src.processor - INFO - 📏 Дистанция: 26.61 единиц (масштаб: 12.306)
+2025-11-19 17:21:40,633 - src.processor - INFO - 🔄 Обнаружено поворотов: 12
+2025-11-19 17:39:36,084 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:39:36,085 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:39:36,655 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:40:04,532 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:40:04,603 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:40:04,818 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:40:04,818 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:40:04,818 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:40:04,819 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:40:04,819 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:42:40,616 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:42:40,616 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:42:40,622 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:42:56,885 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:42:56,924 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:42:57,084 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:42:57,085 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:42:57,085 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:42:57,085 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:42:57,085 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:43:50,031 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:43:50,031 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:43:50,039 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:44:06,288 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:44:06,331 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:44:06,515 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:44:06,515 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:44:06,515 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:44:06,515 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:44:06,515 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:44:54,874 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:44:54,874 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:44:54,879 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:45:11,471 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:45:11,508 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:45:11,670 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:45:11,671 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:45:11,671 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:45:11,671 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:45:11,671 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:46:08,026 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:46:08,026 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:46:08,034 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:46:24,277 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:46:24,316 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:46:24,474 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:46:24,474 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:46:24,474 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:46:24,475 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:46:24,475 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:47:35,886 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:47:35,886 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:47:35,894 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:47:52,271 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:47:52,308 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:47:52,463 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:47:52,463 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:47:52,463 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 17:47:52,463 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:47:52,463 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 17:50:17,723 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:50:17,724 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:50:17,732 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:50:34,396 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:50:34,439 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:50:34,621 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:50:34,621 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:50:34,621 - src.processor - INFO - 📊 Результаты: 451 точек траектории
+2025-11-19 17:50:34,621 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:50:34,621 - src.processor - INFO - 🔄 Обнаружено поворотов: 9
+2025-11-19 17:51:44,511 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:51:44,512 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:51:44,517 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:52:00,829 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:52:00,872 - matplotlib.axes._base - WARNING - Ignoring fixed y limits to fulfill fixed data aspect with adjustable data limits.
+2025-11-19 17:52:01,041 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:52:01,041 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:52:01,041 - src.processor - INFO - 📊 Результаты: 451 точек траектории
+2025-11-19 17:52:01,041 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:52:01,041 - src.processor - INFO - 🔄 Обнаружено поворотов: 9
+2025-11-19 17:58:06,696 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:58:06,697 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:58:06,706 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:58:23,558 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:58:23,558 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:58:23,558 - src.processor - INFO - 📊 Результаты: 451 точек траектории
+2025-11-19 17:58:23,558 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:58:23,558 - src.processor - INFO - 🔄 Обнаружено поворотов: 9
+2025-11-19 17:59:28,963 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 17:59:28,964 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:59:28,970 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 17:59:45,108 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 17:59:45,108 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 17:59:45,108 - src.processor - INFO - 📊 Результаты: 451 точек траектории
+2025-11-19 17:59:45,108 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 17:59:45,108 - src.processor - INFO - 🔄 Обнаружено поворотов: 9
+2025-11-19 18:04:05,115 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:04:05,115 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:04:05,122 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:04:21,995 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:04:21,995 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:04:21,995 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:04:21,995 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 18:04:21,995 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 18:08:55,469 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:08:55,470 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:08:55,477 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:09:11,166 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:09:11,166 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:09:11,166 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:09:11,166 - src.processor - INFO - 📏 Дистанция: 5.72 единиц (масштаб: 12.306)
+2025-11-19 18:09:11,166 - src.processor - INFO - 🔄 Обнаружено поворотов: 2
+2025-11-19 18:10:53,397 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:10:53,397 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:10:53,403 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:11:09,231 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:11:09,231 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:11:09,231 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:11:09,231 - src.processor - INFO - 📏 Дистанция: 0.66 единиц (масштаб: 12.306)
+2025-11-19 18:11:09,231 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 18:14:14,520 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:14:14,521 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:14:14,527 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:14:30,290 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:14:30,290 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:14:30,290 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:14:30,290 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 18:14:30,290 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 18:17:18,961 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:17:18,961 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:17:18,967 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:17:35,542 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:17:35,542 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:17:35,542 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:17:35,542 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 18:17:35,542 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 18:18:49,661 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:18:49,662 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:18:49,668 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:19:06,002 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:19:06,002 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:19:06,002 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:19:06,002 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 18:19:06,002 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 18:21:08,020 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:21:08,020 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:21:08,028 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:21:24,428 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:21:24,430 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:21:24,430 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:21:24,430 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 18:21:24,430 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 18:21:39,748 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 18:21:39,748 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:21:39,754 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 18:21:56,978 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 18:21:56,978 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 18:21:56,978 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 18:21:56,978 - src.processor - INFO - 📏 Дистанция: 11250.31 единиц (масштаб: 12.306)
+2025-11-19 18:21:56,978 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 22:40:35,164 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:40:35,206 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:40:37,015 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:41:02,667 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:41:02,667 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:41:02,667 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:41:02,667 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:41:02,667 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 22:42:00,435 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:42:00,435 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:42:00,441 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:42:17,127 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:42:17,127 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:42:17,127 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:42:17,127 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:42:17,127 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 22:44:13,461 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:44:13,462 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:44:13,467 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:44:33,506 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:44:33,506 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:44:33,506 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:44:33,506 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:44:33,506 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 22:53:10,390 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:53:10,391 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:53:10,397 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:53:25,265 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:53:25,265 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:53:25,265 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:53:25,265 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:53:25,265 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 22:54:16,125 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:54:16,125 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:54:16,131 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:54:32,099 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:54:32,099 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:54:32,099 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:54:32,099 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:54:32,099 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 22:55:44,942 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 22:55:44,942 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:55:44,948 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 22:56:00,127 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 22:56:00,127 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 22:56:00,127 - src.processor - INFO - 📊 Результаты: 226 точек траектории
+2025-11-19 22:56:00,127 - src.processor - INFO - 📏 Дистанция: 57.03 единиц (масштаб: 12.306)
+2025-11-19 22:56:00,127 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 23:05:58,797 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:05:58,799 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:05:58,807 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:09:21,884 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:09:21,885 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:09:21,893 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:09:32,489 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:09:32,489 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:09:32,489 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:09:32,489 - src.processor - INFO - 📏 Дистанция: 56.51 единиц (масштаб: 12.306)
+2025-11-19 23:09:32,489 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:12:03,306 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:12:03,307 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:12:03,314 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:12:14,216 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:12:14,216 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:12:14,216 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:12:14,217 - src.processor - INFO - 📏 Дистанция: 56.51 единиц (масштаб: 12.306)
+2025-11-19 23:12:14,217 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:12:56,388 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:12:56,388 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:12:56,394 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:13:07,132 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:13:07,132 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:13:07,132 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:13:07,132 - src.processor - INFO - 📏 Дистанция: 69.53 единиц (масштаб: 12.306)
+2025-11-19 23:13:07,132 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:13:20,714 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:13:20,715 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:13:20,720 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:13:31,389 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:13:31,389 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:13:31,389 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:13:31,389 - src.processor - INFO - 📏 Дистанция: 49.85 единиц (масштаб: 12.306)
+2025-11-19 23:13:31,389 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:14:06,655 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:14:06,655 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:14:06,662 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:14:17,313 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:14:17,313 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:14:17,313 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:14:17,313 - src.processor - INFO - 📏 Дистанция: 47.77 единиц (масштаб: 12.306)
+2025-11-19 23:14:17,313 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:14:46,193 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:14:46,193 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:14:46,200 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:14:56,818 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:14:56,818 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:14:56,818 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:14:56,818 - src.processor - INFO - 📏 Дистанция: 47.77 единиц (масштаб: 12.306)
+2025-11-19 23:14:56,818 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:17:29,072 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:17:29,072 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:17:29,079 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:17:40,570 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:17:40,571 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:17:40,571 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:17:40,571 - src.processor - INFO - 📏 Дистанция: 47.88 единиц (масштаб: 12.306)
+2025-11-19 23:17:40,571 - src.processor - INFO - 🔄 Обнаружено поворотов: 0
+2025-11-19 23:25:12,996 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:25:12,996 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:25:13,004 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:25:23,693 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:25:23,693 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:25:23,693 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:25:23,693 - src.processor - INFO - 📏 Дистанция: 50.73 единиц (масштаб: 12.306)
+2025-11-19 23:25:23,693 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 23:32:26,802 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:32:26,802 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:32:26,810 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:32:38,113 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:32:38,113 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:32:38,113 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:32:38,113 - src.processor - INFO - 📏 Дистанция: 50.84 единиц (масштаб: 12.306)
+2025-11-19 23:32:38,113 - src.processor - INFO - 🔄 Обнаружено поворотов: 2
+2025-11-19 23:37:14,557 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:37:14,558 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:37:14,563 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:37:25,742 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:37:25,742 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:37:25,742 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:37:25,742 - src.processor - INFO - 📏 Дистанция: 50.56 единиц (масштаб: 12.306)
+2025-11-19 23:37:25,742 - src.processor - INFO - 🔄 Обнаружено поворотов: 4
+2025-11-19 23:41:52,788 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:41:52,788 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:41:52,794 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-19 23:42:04,039 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:42:04,039 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-19 23:42:04,039 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-19 23:42:04,039 - src.processor - INFO - 📏 Дистанция: 50.56 единиц (масштаб: 12.306)
+2025-11-19 23:42:04,039 - src.processor - INFO - 🔄 Обнаружено поворотов: 4
+2025-11-19 23:56:08,222 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:56:08,222 - src.processor - INFO - 🚀 Начало обработки: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-19 23:56:08,230 - src.processor - INFO - 📹 Информация о видео: 1920x1080, 28.0 FPS, 35.0 сек
+2025-11-19 23:56:16,546 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_FINAL_FOR_SLAM_analysis.json
+2025-11-19 23:56:16,546 - src.processor - INFO - ✅ Обработка завершена: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-19 23:56:16,546 - src.processor - INFO - 📊 Результаты: 333 точек траектории
+2025-11-19 23:56:16,546 - src.processor - INFO - 📏 Дистанция: 256.62 единиц (масштаб: 12.306)
+2025-11-19 23:56:16,546 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-19 23:59:56,836 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-19 23:59:56,836 - src.processor - INFO - 🚀 Начало обработки: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-19 23:59:56,842 - src.processor - INFO - 📹 Информация о видео: 1920x1080, 28.0 FPS, 35.0 сек
+2025-11-20 00:00:05,346 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_FINAL_FOR_SLAM_analysis.json
+2025-11-20 00:00:05,346 - src.processor - INFO - ✅ Обработка завершена: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-20 00:00:05,346 - src.processor - INFO - 📊 Результаты: 333 точек траектории
+2025-11-20 00:00:05,346 - src.processor - INFO - 📏 Дистанция: 256.62 единиц (масштаб: 12.306)
+2025-11-20 00:00:05,346 - src.processor - INFO - 🔄 Обнаружено поворотов: 5
+2025-11-20 00:04:20,731 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-20 00:04:20,731 - src.processor - INFO - 🚀 Начало обработки: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-20 00:04:20,736 - src.processor - INFO - 📹 Информация о видео: 1920x1080, 28.0 FPS, 35.0 сек
+2025-11-20 00:04:29,071 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_FINAL_FOR_SLAM_analysis.json
+2025-11-20 00:04:29,071 - src.processor - INFO - ✅ Обработка завершена: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-20 00:04:29,071 - src.processor - INFO - 📊 Результаты: 333 точек траектории
+2025-11-20 00:04:29,071 - src.processor - INFO - 📏 Дистанция: 256.62 единиц (масштаб: 12.306)
+2025-11-20 00:04:29,071 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-20 00:11:49,479 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-20 00:11:49,479 - src.processor - INFO - 🚀 Начало обработки: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-20 00:11:49,487 - src.processor - INFO - 📹 Информация о видео: 1920x1080, 28.0 FPS, 35.0 сек
+2025-11-20 00:11:59,038 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_1_FINAL_FOR_SLAM_analysis.json
+2025-11-20 00:11:59,038 - src.processor - INFO - ✅ Обработка завершена: my_video_1_FINAL_FOR_SLAM.mp4
+2025-11-20 00:11:59,038 - src.processor - INFO - 📊 Результаты: 333 точек траектории
+2025-11-20 00:11:59,038 - src.processor - INFO - 📏 Дистанция: 256.62 единиц (масштаб: 12.306)
+2025-11-20 00:11:59,038 - src.processor - INFO - 🔄 Обнаружено поворотов: 6
+2025-11-20 00:13:01,251 - src.processor - INFO - Инициализирован FullFeatureProcessor с scale_factor=12.306
+2025-11-20 00:13:01,251 - src.processor - INFO - 🚀 Начало обработки: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-20 00:13:01,256 - src.processor - INFO - 📹 Информация о видео: 1080x1920, 30.0 FPS, 30.0 сек
+2025-11-20 00:13:12,322 - src.processor - INFO - 💾 Результаты сохранены: data\output\my_video_2_FINAL_FOR_SLAM_analysis.json
+2025-11-20 00:13:12,322 - src.processor - INFO - ✅ Обработка завершена: my_video_2_FINAL_FOR_SLAM.mp4
+2025-11-20 00:13:12,322 - src.processor - INFO - 📊 Результаты: 307 точек траектории
+2025-11-20 00:13:12,322 - src.processor - INFO - 📏 Дистанция: 50.56 единиц (масштаб: 12.306)
+2025-11-20 00:13:12,322 - src.processor - INFO - 🔄 Обнаружено поворотов: 2

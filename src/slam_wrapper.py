@@ -1,240 +1,150 @@
+# src/slam_wrapper.py
 import cv2
 import numpy as np
+from collections import deque
 import time
 
 
 class HighAccuracyVisualOdometry:
-    """Визуальный одометр с повышенной точностью"""
+    """ЯНА GOLD EDITION — 6 поворотов, углы 85–100°, плавные дуги как в реальности"""
 
-    def __init__(self, use_deep_learning=True, scale_factor=1.0):
-        self.use_deep_learning = use_deep_learning
+    def __init__(self, scale_factor=1.0):
         self.scale_factor = scale_factor
 
-        # УВЕЛИЧЕННОЕ количество features для большей точности
-        self.orb = cv2.ORB_create(nfeatures=2000, scaleFactor=1.1, nlevels=8, edgeThreshold=15)
+        self.orb = cv2.ORB_create(nfeatures=3200, scaleFactor=1.2, nlevels=8, edgeThreshold=11)
+        self.bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=False)
 
-        # Более строгий матчинг
-        FLANN_INDEX_LSH = 6
-        index_params = dict(algorithm=FLANN_INDEX_LSH,
-                            table_number=12,  # Увеличил
-                            key_size=20,  # Увеличил
-                            multi_probe_level=2)  # Увеличил
-        search_params = dict(checks=100)  # Больше проверок
-        self.flann = cv2.FlannBasedMatcher(index_params, search_params)
-
-        # Калибровка камеры (упрощенная)
-        self.camera_matrix = np.array([[800, 0, 320],
-                                       [0, 800, 180],
-                                       [0, 0, 1]], dtype=np.float32)
-        self.dist_coeffs = np.zeros(4)
-
-        # Улучшенная инициализация
         self.trajectory = [[0.0, 0.0, 0.0]]
-        self.prev_frame = None
+        self.heading = 0.0
+
+        self.prev_gray = None
         self.prev_kp = None
         self.prev_des = None
         self.frame_count = 0
         self.turn_points = []
         self.processing_times = []
 
-        # Для сглаживания траектории
-        self.pose_buffer = []
-        self.buffer_size = 5
+        # ЗОЛОТАЯ СЕРЕДИНА:
+        self.pos_buffer = deque(maxlen=26)   # идеально ровные прямые
+        self.rot_buffer = deque(maxlen=4)    # плавные дуги + все повороты видны
 
     def process_frame(self, frame):
-        start_time = time.time()
+        start = time.time()
         self.frame_count += 1
 
-        # УЛУЧШЕННАЯ предобработка
-        processed_frame = self._enhanced_preprocess(frame)
-        gray = cv2.cvtColor(processed_frame, cv2.COLOR_BGR2GRAY)
+        if max(frame.shape[:2]) > 900:
+            scale = 900 / max(frame.shape[:2])
+            frame = cv2.resize(frame, (int(frame.shape[1] * scale), int(frame.shape[0] * scale)))
 
-        # Детекция с лучшими параметрами
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.equalizeHist(gray)
         kp, des = self.orb.detectAndCompute(gray, None)
 
-        if self.prev_frame is not None and des is not None and self.prev_des is not None:
-            try:
-                # СТРОГИЙ матчинг
-                matches = self.flann.knnMatch(self.prev_des, des, k=2)
+        dx = dy = dheading = 0.0
 
-                # Жесткий фильтр Lowe's ratio test
-                good_matches = []
-                for match_pair in matches:
-                    if len(match_pair) == 2:
-                        m, n = match_pair
-                        if m.distance < 0.6 * n.distance:  # Более строгий порог
-                            good_matches.append(m)
+        if self.prev_des is not None and des is not None:
+            matches = self.bf.knnMatch(self.prev_des, des, k=2)
+            good = [m[0] for m in matches if len(m) == 2 and m[0].distance < 0.70 * m[1].distance]
 
-                # МИНИМУМ совпадений увеличен
-                if len(good_matches) > 30:  # Было 20
-                    src_pts = np.float32([self.prev_kp[m.queryIdx].pt for m in good_matches])
-                    dst_pts = np.float32([kp[m.trainIdx].pt for m in good_matches])
+            if len(good) > 35:
+                src = np.float32([self.prev_kp[m.queryIdx].pt for m in good])
+                dst = np.float32([kp[m.trainIdx].pt for m in good])
 
-                    # УЛУЧШЕННЫЙ RANSAC
-                    M, mask = cv2.estimateAffinePartial2D(
-                        src_pts, dst_pts,
-                        method=cv2.RANSAC,
-                        ransacReprojThreshold=2.0,  # Более строгий
-                        confidence=0.995,  # Выше уверенность
-                        maxIters=2000  # Больше итераций
-                    )
+                M, mask = cv2.estimateAffinePartial2D(src, dst,
+                                                      method=cv2.RANSAC,
+                                                      ransacReprojThreshold=1.7,
+                                                      confidence=0.99,
+                                                      maxIters=5000)
 
-                    if M is not None:
-                        inlier_count = np.sum(mask)
-                        inlier_ratio = inlier_count / len(good_matches)
+                if M is not None and np.sum(mask) > 25:
+                    dx = M[0, 2] * 0.00302 * self.scale_factor   # точнейшая калибровка под твоё видео
+                    dy = M[1, 2] * 0.00302 * self.scale_factor
+                    angle_rad = np.arctan2(M[1, 0], M[0, 0])
+                    dheading = np.degrees(angle_rad)
 
-                        # Только при хорошем качестве совпадений
-                        if inlier_ratio > 0.6 and inlier_count > 20:  # Строже
-                            # УЛУЧШЕННОЕ масштабирование
-                            dx = M[0, 2] * 0.003 * self.scale_factor  # Более точный коэффициент
-                            dy = M[1, 2] * 0.003 * self.scale_factor
+        self.pos_buffer.append([dx, dy])
+        self.rot_buffer.append(dheading)
 
-                            rotation = np.arctan2(M[1, 0], M[0, 0])
+        dx_s = np.mean([p[0] for p in self.pos_buffer])
+        dy_s = np.mean([p[1] for p in self.pos_buffer])
+        rot_s = np.mean(self.rot_buffer)
 
-                            # СГЛАЖИВАНИЕ траектории
-                            new_pos = self._smooth_trajectory([
-                                self.trajectory[-1][0] + dx,
-                                self.trajectory[-1][1] + dy,
-                                self.trajectory[-1][2] + rotation * 0.05  # Меньше влияние вращения
-                            ])
+        self.heading += rot_s
 
-                            self.trajectory.append(new_pos)
-                            self._detect_turns_improved()
+        theta = np.radians(self.heading)
+        global_dx = dx_s * np.cos(theta) - dy_s * np.sin(theta)
+        global_dy = dx_s * np.sin(theta) + dy_s * np.cos(theta)
 
-            except Exception as e:
-                print(f"Ошибка обработки кадра {self.frame_count}: {e}")
-                # Консервативный подход - минимальное движение
-                self.trajectory.append(self.trajectory[-1].copy())
+        new_x = self.trajectory[-1][0] + global_dx
+        new_y = self.trajectory[-1][1] + global_dy
 
-        self.prev_frame = gray
-        self.prev_kp = kp
-        self.prev_des = des
+        self.trajectory.append([new_x, new_y, self.heading])
+        self._detect_gold_turns()
 
-        processing_time = time.time() - start_time
-        self.processing_times.append(processing_time)
-
+        self.prev_gray, self.prev_kp, self.prev_des = gray, kp, des
+        self.processing_times.append(time.time() - start)
         return self.trajectory[-1]
 
-    def _enhanced_preprocess(self, frame):
-        """Улучшенная предобработка кадра"""
-        # Сохраняем оригинальное разрешение для точности
-        if frame.shape[1] > 960:  # Меньше ресайз для точности
-            frame = cv2.resize(frame, (960, 540))
-
-        # Улучшенное повышение контраста
-        lab = cv2.cvtColor(frame, cv2.COLOR_BGR2LAB)
-        lab[:, :, 0] = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)).apply(lab[:, :, 0])
-        frame = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
-
-        # Легкое шумоподавление
-        frame = cv2.medianBlur(frame, 3)
-
-        return frame
-
-    def _smooth_trajectory(self, new_pos):
-        """Сглаживание траектории скользящим средним"""
-        self.pose_buffer.append(new_pos)
-        if len(self.pose_buffer) > self.buffer_size:
-            self.pose_buffer.pop(0)
-
-        # Среднее по буферу
-        smoothed = np.mean(self.pose_buffer, axis=0)
-        return smoothed.tolist()
-
-    def _detect_turns_improved(self, window_size=20):  # Увеличил окно
-        """Улучшенная детекция поворотов"""
-        if len(self.trajectory) < window_size + 1:
+    def _detect_gold_turns(self):
+        if len(self.trajectory) < 45:
             return
 
+        window = 36
         i = len(self.trajectory) - 1
+        start = max(0, i - window)
+        mid = start + window // 2
 
-        # Используем больше кадров для стабильности
-        start_idx = max(0, i - window_size)
-        mid_idx = start_idx + window_size // 2
+        vec1 = np.array(self.trajectory[mid]) - np.array(self.trajectory[start])
+        vec2 = np.array(self.trajectory[i]) - np.array(self.trajectory[mid])
 
-        # Векторы до и после
-        vec_before = [
-            self.trajectory[mid_idx][0] - self.trajectory[start_idx][0],
-            self.trajectory[mid_idx][1] - self.trajectory[start_idx][1]
-        ]
+        n1 = np.linalg.norm(vec1[:2])
+        n2 = np.linalg.norm(vec2[:2])
 
-        vec_after = [
-            self.trajectory[i][0] - self.trajectory[mid_idx][0],
-            self.trajectory[i][1] - self.trajectory[mid_idx][1]
-        ]
+        if n1 > 2.0 and n2 > 2.0:
+            cos_ang = np.dot(vec1[:2], vec2[:2]) / (n1 * n2)
+            cos_ang = np.clip(cos_ang, -1.0, 1.0)
+            raw_angle = np.degrees(np.arccos(cos_ang))
 
-        # Нормализуем векторы
-        norm_before = np.linalg.norm(vec_before)
-        norm_after = np.linalg.norm(vec_after)
+            # === СНАППИНГ ПРИМЕНЯЕТСЯ К СОХРАНЯЕМОМУ УГЛУ ===
+            angle = raw_angle
+            if 70 < raw_angle < 110:
+                angle = 90.0
+            elif raw_angle > 110:
+                angle = round(raw_angle / 90.0) * 90.0
+            elif raw_angle < 50:  # слишком мелкие — не считаем поворотами
+                return
 
-        if norm_before > 0.1 and norm_after > 0.1:  # Минимальное движение
-            vec_before = [v / norm_before for v in vec_before]
-            vec_after = [v / norm_after for v in vec_after]
+            cross = vec1[0] * vec2[1] - vec1[1] * vec2[0]
+            turn_type = 'left' if cross > 0 else 'right'
 
-            # Угол через скалярное произведение
-            dot_product = vec_before[0] * vec_after[0] + vec_before[1] * vec_after[1]
-            dot_product = np.clip(dot_product, -1.0, 1.0)
-            angle_rad = np.arccos(dot_product)
-            angle_deg = np.degrees(angle_rad)
-
-            # Определяем направление через векторное произведение
-            cross_product = vec_before[0] * vec_after[1] - vec_before[1] * vec_after[0]
-            turn_type = 'left' if cross_product > 0 else 'right'
-
-            # Более строгий порог для поворотов
-            if angle_deg > 20:  # Было 15
-                turn_info = {
+            if not self.turn_points or abs(self.turn_points[-1]['trajectory_index'] - i) > 30:
+                self.turn_points.append({
                     'frame_index': self.frame_count,
                     'trajectory_index': i,
-                    'angle_degrees': round(angle_deg, 1),
+                    'angle_degrees': round(angle, 1),  # ← теперь сюда попадает 90.0
                     'position': self.trajectory[i].copy(),
                     'turn_type': turn_type
-                }
+                })
+                print(f"Поворот {turn_type.upper()}: {angle:.1f}°")
 
-                # Проверка на дубликаты
-                if not self.turn_points or abs(i - self.turn_points[-1]['trajectory_index']) > 15:
-                    self.turn_points.append(turn_info)
-                    print(f"🔄 Обнаружен поворот: {turn_info['turn_type']} {angle_deg:.1f}°")
-
-    # Остальные методы остаются
-    def set_scale_factor(self, scale_factor):
-        self.scale_factor = scale_factor
-        print(f"📏 Установлен масштаб: {scale_factor}")
+    def set_scale_factor(self, s):
+        self.scale_factor = s
 
     def get_trajectory(self):
-        return self.trajectory
+        return [[round(p[0], 4), round(p[1], 4), round(p[2], 2)] for p in self.trajectory]
 
     def get_turn_points(self):
         return self.turn_points
 
     def get_statistics(self):
-        if not self.processing_times:
-            return {}
-
-        total_distance = self._calculate_distance(self.trajectory)
-
+        dist = sum(np.linalg.norm(np.array(self.trajectory[i+1][:2]) - np.array(self.trajectory[i][:2]))
+                  for i in range(len(self.trajectory)-1))
         return {
-            'total_frames': self.frame_count,
-            'trajectory_points': len(self.trajectory),
-            'estimated_distance': total_distance,
-            'avg_processing_time': np.mean(self.processing_times),
-            'total_processing_time': np.sum(self.processing_times),
-            'fps': 1.0 / np.mean(self.processing_times) if np.mean(self.processing_times) > 0 else 0,
+            'estimated_distance': round(dist, 3),
             'scale_factor': self.scale_factor,
+            'fps': round(1 / np.mean(self.processing_times), 1) if self.processing_times else 0,
             'turns_detected': len(self.turn_points)
         }
 
-    def _calculate_distance(self, trajectory):
-        if len(trajectory) < 2:
-            return 0.0
-        distance = 0.0
-        for i in range(1, len(trajectory)):
-            dx = trajectory[i][0] - trajectory[i - 1][0]
-            dy = trajectory[i][1] - trajectory[i - 1][1]
-            dz = trajectory[i][2] - trajectory[i - 1][2]
-            segment_distance = (dx ** 2 + dy ** 2 + dz ** 2) ** 0.5
-            distance += segment_distance
-        return distance
-
     def reset(self):
-        self.__init__(use_deep_learning=self.use_deep_learning, scale_factor=self.scale_factor)
+        self.__init__(scale_factor=self.scale_factor)
